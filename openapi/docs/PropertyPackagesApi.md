@@ -4,30 +4,31 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**property_packages_flowsheet_property_packages_connection_add_connection_create**](PropertyPackagesApi.md#property_packages_flowsheet_property_packages_connection_add_connection_create) | **POST** /api/property_packages/flowsheet-property_packages-connection/add_connection/ | 
-[**property_packages_flowsheet_property_packages_connection_get_all_connections_retrieve**](PropertyPackagesApi.md#property_packages_flowsheet_property_packages_connection_get_all_connections_retrieve) | **GET** /api/property_packages/flowsheet-property_packages-connection/{id}/get_all_connections/ | 
-[**property_packages_flowsheet_property_packages_connection_remove_connection_create**](PropertyPackagesApi.md#property_packages_flowsheet_property_packages_connection_remove_connection_create) | **POST** /api/property_packages/flowsheet-property_packages-connection/remove_connection/ | 
+[**property_packages_flowsheet_property_packages_bulk_update_create**](PropertyPackagesApi.md#property_packages_flowsheet_property_packages_bulk_update_create) | **POST** /api/property_packages/flowsheet-property_packages/bulk_update/ | 
+[**property_packages_flowsheet_property_packages_get_all_connections_retrieve**](PropertyPackagesApi.md#property_packages_flowsheet_property_packages_get_all_connections_retrieve) | **GET** /api/property_packages/flowsheet-property_packages/get_all_connections/ | 
+[**property_packages_flowsheet_property_packages_list**](PropertyPackagesApi.md#property_packages_flowsheet_property_packages_list) | **GET** /api/property_packages/flowsheet-property_packages/ | 
 [**property_packages_property_packages_list**](PropertyPackagesApi.md#property_packages_property_packages_list) | **GET** /api/property_packages/property_packages/ | 
 
 
 
-## property_packages_flowsheet_property_packages_connection_add_connection_create
+## property_packages_flowsheet_property_packages_bulk_update_create
 
-> models::FlowsheetPropertyPackage property_packages_flowsheet_property_packages_connection_add_connection_create(flowsheet_property_package)
+> property_packages_flowsheet_property_packages_bulk_update_create(flowsheet_id, flowsheet_property_package_bulk_update)
 
 
-Creating new link between flowsheet and compound
+Create and delete multiple connections at once.  Parameters: - flowsheetId: The flowsheet ID  Request body: - propertyPackages: List of property package IDs  Returns: - None
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**flowsheet_property_package** | [**FlowsheetPropertyPackage**](FlowsheetPropertyPackage.md) |  | [required] |
+**flowsheet_id** | **i32** |  | [required] |
+**flowsheet_property_package_bulk_update** | [**FlowsheetPropertyPackageBulkUpdate**](FlowsheetPropertyPackageBulkUpdate.md) |  | [required] |
 
 ### Return type
 
-[**models::FlowsheetPropertyPackage**](FlowsheetPropertyPackage.md)
+ (empty response body)
 
 ### Authorization
 
@@ -36,28 +37,28 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## property_packages_flowsheet_property_packages_connection_get_all_connections_retrieve
+## property_packages_flowsheet_property_packages_get_all_connections_retrieve
 
-> models::FlowsheetPropertyPackage property_packages_flowsheet_property_packages_connection_get_all_connections_retrieve(id)
+> models::FlowsheetPropertyPackageBulkUpdate property_packages_flowsheet_property_packages_get_all_connections_retrieve(flowsheet_id)
 
 
-Retrieve all items associated with the given flowsheet ID.  Parameters: - id: The flowsheet ID  Returns: - list of associated connections
+Retrieve the ids of all property packages associated with the given flowsheet ID.
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **i32** | A unique integer value identifying this flowsheet compounds. | [required] |
+**flowsheet_id** | **i32** |  | [required] |
 
 ### Return type
 
-[**models::FlowsheetPropertyPackage**](FlowsheetPropertyPackage.md)
+[**models::FlowsheetPropertyPackageBulkUpdate**](FlowsheetPropertyPackageBulkUpdate.md)
 
 ### Authorization
 
@@ -71,23 +72,21 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## property_packages_flowsheet_property_packages_connection_remove_connection_create
+## property_packages_flowsheet_property_packages_list
 
-> models::FlowsheetPropertyPackage property_packages_flowsheet_property_packages_connection_remove_connection_create(flowsheet_property_package)
+> Vec<models::FlowsheetPropertyPackage> property_packages_flowsheet_property_packages_list(flowsheet_id)
 
-
-Removing link between flowsheet and property package
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**flowsheet_property_package** | [**FlowsheetPropertyPackage**](FlowsheetPropertyPackage.md) |  | [required] |
+**flowsheet_id** | **i32** |  | [required] |
 
 ### Return type
 
-[**models::FlowsheetPropertyPackage**](FlowsheetPropertyPackage.md)
+[**Vec<models::FlowsheetPropertyPackage>**](FlowsheetPropertyPackage.md)
 
 ### Authorization
 
@@ -95,7 +94,7 @@ Name | Type | Description  | Required | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

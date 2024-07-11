@@ -7,15 +7,14 @@ Method | HTTP request | Description
 [**compounds_compounds_get_valid_property_packages_retrieve**](CompoundsApi.md#compounds_compounds_get_valid_property_packages_retrieve) | **GET** /api/compounds/compounds/{ID}/get_valid_property_packages/ | 
 [**compounds_compounds_list**](CompoundsApi.md#compounds_compounds_list) | **GET** /api/compounds/compounds/ | 
 [**compounds_compounds_retrieve**](CompoundsApi.md#compounds_compounds_retrieve) | **GET** /api/compounds/compounds/{ID}/ | 
-[**compounds_flowsheet_compound_connection_add_connection_create**](CompoundsApi.md#compounds_flowsheet_compound_connection_add_connection_create) | **POST** /api/compounds/flowsheet-compound-connection/add_connection/ | 
-[**compounds_flowsheet_compound_connection_get_all_connections_retrieve**](CompoundsApi.md#compounds_flowsheet_compound_connection_get_all_connections_retrieve) | **GET** /api/compounds/flowsheet-compound-connection/{id}/get_all_connections/ | 
-[**compounds_flowsheet_compound_connection_remove_connection_create**](CompoundsApi.md#compounds_flowsheet_compound_connection_remove_connection_create) | **POST** /api/compounds/flowsheet-compound-connection/remove_connection/ | 
+[**compounds_flowsheet_compounds_bulk_update_create**](CompoundsApi.md#compounds_flowsheet_compounds_bulk_update_create) | **POST** /api/compounds/flowsheet-compounds/bulk_update/ | 
+[**compounds_flowsheet_compounds_get_all_connections_retrieve**](CompoundsApi.md#compounds_flowsheet_compounds_get_all_connections_retrieve) | **GET** /api/compounds/flowsheet-compounds/get_all_connections/ | 
 
 
 
 ## compounds_compounds_get_valid_property_packages_retrieve
 
-> std::collections::HashMap<String, serde_json::Value> compounds_compounds_get_valid_property_packages_retrieve(id)
+> models::Compound compounds_compounds_get_valid_property_packages_retrieve(id)
 
 
 Retrieves all valid property packages for single compound (based on compound ID) a \"valid\" property package is one where an entry exists for that compound type  Parameters: - id: The compound ID  Returns: - list of property packages
@@ -29,7 +28,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**std::collections::HashMap<String, serde_json::Value>**](serde_json::Value.md)
+[**models::Compound**](Compound.md)
 
 ### Authorization
 
@@ -45,7 +44,7 @@ Name | Type | Description  | Required | Notes
 
 ## compounds_compounds_list
 
-> Vec<std::collections::HashMap<String, serde_json::Value>> compounds_compounds_list()
+> Vec<models::Compound> compounds_compounds_list()
 
 
 ### Parameters
@@ -54,7 +53,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Vec<std::collections::HashMap<String, serde_json::Value>>**](std::collections::HashMap.md)
+[**Vec<models::Compound>**](Compound.md)
 
 ### Authorization
 
@@ -70,7 +69,7 @@ This endpoint does not need any parameter.
 
 ## compounds_compounds_retrieve
 
-> std::collections::HashMap<String, serde_json::Value> compounds_compounds_retrieve(id)
+> models::Compound compounds_compounds_retrieve(id)
 
 
 ### Parameters
@@ -82,7 +81,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**std::collections::HashMap<String, serde_json::Value>**](serde_json::Value.md)
+[**models::Compound**](Compound.md)
 
 ### Authorization
 
@@ -96,23 +95,24 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## compounds_flowsheet_compound_connection_add_connection_create
+## compounds_flowsheet_compounds_bulk_update_create
 
-> models::FlowsheetCompound compounds_flowsheet_compound_connection_add_connection_create(flowsheet_compound)
+> compounds_flowsheet_compounds_bulk_update_create(flowsheet_id, flowsheet_compounds_bulk_update)
 
 
-Creating new link between flowsheet and compound
+Create and delete multiple connections at once.  Parameters: - flowsheetId: The flowsheet ID  Request body: - compounds: List of compound IDs  Returns: - None
 
 ### Parameters
 
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**flowsheet_compound** | [**FlowsheetCompound**](FlowsheetCompound.md) |  | [required] |
+**flowsheet_id** | **i32** |  | [required] |
+**flowsheet_compounds_bulk_update** | [**FlowsheetCompoundsBulkUpdate**](FlowsheetCompoundsBulkUpdate.md) |  | [required] |
 
 ### Return type
 
-[**models::FlowsheetCompound**](FlowsheetCompound.md)
+ (empty response body)
 
 ### Authorization
 
@@ -121,14 +121,14 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## compounds_flowsheet_compound_connection_get_all_connections_retrieve
+## compounds_flowsheet_compounds_get_all_connections_retrieve
 
-> models::FlowsheetCompound compounds_flowsheet_compound_connection_get_all_connections_retrieve(id)
+> models::FlowsheetCompoundsBulkUpdate compounds_flowsheet_compounds_get_all_connections_retrieve(flowsheet_id)
 
 
 Retrieve all items associated with the given flowsheet ID.  Parameters: - id: The flowsheet ID  Returns: - list of associated connections
@@ -138,11 +138,11 @@ Retrieve all items associated with the given flowsheet ID.  Parameters: - id: Th
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **i32** | A unique integer value identifying this flowsheet compounds. | [required] |
+**flowsheet_id** | **i32** |  | [required] |
 
 ### Return type
 
-[**models::FlowsheetCompound**](FlowsheetCompound.md)
+[**models::FlowsheetCompoundsBulkUpdate**](FlowsheetCompoundsBulkUpdate.md)
 
 ### Authorization
 
@@ -151,36 +151,6 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## compounds_flowsheet_compound_connection_remove_connection_create
-
-> models::FlowsheetCompound compounds_flowsheet_compound_connection_remove_connection_create(flowsheet_compound)
-
-
-Removing link between flowsheet and compound
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**flowsheet_compound** | [**FlowsheetCompound**](FlowsheetCompound.md) |  | [required] |
-
-### Return type
-
-[**models::FlowsheetCompound**](FlowsheetCompound.md)
-
-### Authorization
-
-[jwtAuth](../README.md#jwtAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

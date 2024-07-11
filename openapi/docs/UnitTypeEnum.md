@@ -13,8 +13,6 @@
 | CinematicViscosity | cinematic_viscosity |
 | Compressibility | compressibility |
 | CompressibilityFactor | compressibilityFactor |
-| DeltaP | deltaP |
-| DeltaT | deltaT |
 | Density | density |
 | Diameter | diameter |
 | Distance | distance |
@@ -29,7 +27,6 @@
 | Gor | gor |
 | Head | head |
 | HeatTransfCoeff | heat_transf_coeff |
-| HeatCapacityCp | heatCapacityCp |
 | HeatCapacityCv | heatCapacityCv |
 | Heatflow | heatflow |
 | IdealGasHeatCapacity | idealGasHeatCapacity |
@@ -54,7 +51,6 @@
 | ReacRate | reac_rate |
 | ReacRateHeterog | reac_rate_heterog |
 | SpecVol | spec_vol |
-| SpeedOfSound | speedOfSound |
 | SurfaceTension | surfaceTension |
 | Temperature | temperature |
 | ThermalConductivity | thermalConductivity |
@@ -72,7 +68,7 @@
 | Diffusivity | diffusivity |
 | None | none |
 | Conductance | conductance |
-| Percentage | percentage |
+| Ratio | ratio |
 | Rpm | rpm |
 | Voltage | voltage |
 | Ampere | ampere |

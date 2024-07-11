@@ -13,6 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SolveRequest {
+    #[serde(rename = "flowsheet_id")]
+    pub flowsheet_id: i32,
     #[serde(rename = "debug", skip_serializing_if = "Option::is_none")]
     pub debug: Option<bool>,
     #[serde(rename = "require_variables_fixed", skip_serializing_if = "Option::is_none")]
@@ -20,8 +22,9 @@ pub struct SolveRequest {
 }
 
 impl SolveRequest {
-    pub fn new() -> SolveRequest {
+    pub fn new(flowsheet_id: i32) -> SolveRequest {
         SolveRequest {
+            flowsheet_id,
             debug: None,
             require_variables_fixed: None,
         }

@@ -17,13 +17,16 @@ pub struct FlowsheetPropertyPackage {
     pub flowsheet: i32,
     #[serde(rename = "property_package")]
     pub property_package: i32,
+    #[serde(rename = "property_package_name")]
+    pub property_package_name: String,
 }
 
 impl FlowsheetPropertyPackage {
-    pub fn new(flowsheet: i32, property_package: i32) -> FlowsheetPropertyPackage {
+    pub fn new(flowsheet: i32, property_package: i32, property_package_name: String) -> FlowsheetPropertyPackage {
         FlowsheetPropertyPackage {
             flowsheet,
             property_package,
+            property_package_name,
         }
     }
 }

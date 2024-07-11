@@ -13,17 +13,17 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FlowsheetCompound {
-    #[serde(rename = "flowsheet")]
-    pub flowsheet: i32,
     #[serde(rename = "compound")]
     pub compound: i32,
+    #[serde(rename = "flowsheet")]
+    pub flowsheet: i32,
 }
 
 impl FlowsheetCompound {
-    pub fn new(flowsheet: i32, compound: i32) -> FlowsheetCompound {
+    pub fn new(compound: i32, flowsheet: i32) -> FlowsheetCompound {
         FlowsheetCompound {
-            flowsheet,
             compound,
+            flowsheet,
         }
     }
 }

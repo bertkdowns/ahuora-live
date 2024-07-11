@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 Cargo.toml
 README.md
@@ -10,6 +9,7 @@ docs/AdjustCalculationModeEnum.md
 docs/AdjustVarTypeEnum.md
 docs/CalculationMode16dEnum.md
 docs/CompositionBasisEnum.md
+docs/Compound.md
 docs/CompoundsApi.md
 docs/Compressor.md
 docs/CompressorCalculationModeEnum.md
@@ -35,7 +35,9 @@ docs/FloatingTableAmountBasisEnum.md
 docs/FlowDirectionEnum.md
 docs/Flowsheet.md
 docs/FlowsheetCompound.md
+docs/FlowsheetCompoundsBulkUpdate.md
 docs/FlowsheetPropertyPackage.md
+docs/FlowsheetPropertyPackageBulkUpdate.md
 docs/ForcePhaseEnum.md
 docs/GraphicObject.md
 docs/GraphicsgroupingsApi.md
@@ -126,6 +128,7 @@ src/models/adjust_calculation_mode_enum.rs
 src/models/adjust_var_type_enum.rs
 src/models/calculation_mode16d_enum.rs
 src/models/composition_basis_enum.rs
+src/models/compound.rs
 src/models/compressor.rs
 src/models/compressor_calculation_mode_enum.rs
 src/models/con_type_enum.rs
@@ -149,7 +152,9 @@ src/models/floating_table_amount_basis_enum.rs
 src/models/flow_direction_enum.rs
 src/models/flowsheet.rs
 src/models/flowsheet_compound.rs
+src/models/flowsheet_compounds_bulk_update.rs
 src/models/flowsheet_property_package.rs
+src/models/flowsheet_property_package_bulk_update.rs
 src/models/force_phase_enum.rs
 src/models/graphic_object.rs
 src/models/grouping.rs

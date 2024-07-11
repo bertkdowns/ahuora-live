@@ -3149,7 +3149,7 @@ pub async fn unitops_materialstreams_destroy(configuration: &configuration::Conf
     }
 }
 
-pub async fn unitops_materialstreams_list(configuration: &configuration::Configuration, ) -> Result<Vec<models::MaterialStream>, Error<UnitopsMaterialstreamsListError>> {
+pub async fn unitops_materialstreams_list(configuration: &configuration::Configuration, flowsheet_owner: i32) -> Result<Vec<models::MaterialStream>, Error<UnitopsMaterialstreamsListError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -3157,6 +3157,7 @@ pub async fn unitops_materialstreams_list(configuration: &configuration::Configu
     let local_var_uri_str = format!("{}/api/unitops/materialstreams/", local_var_configuration.base_path);
     let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+    local_var_req_builder = local_var_req_builder.query(&[("flowsheetOwner", &flowsheet_owner.to_string())]);
     if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
         local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
     }
@@ -5406,7 +5407,7 @@ pub async fn unitops_unitops_destroy(configuration: &configuration::Configuratio
     }
 }
 
-pub async fn unitops_unitops_list(configuration: &configuration::Configuration, ) -> Result<Vec<models::UnitOp>, Error<UnitopsUnitopsListError>> {
+pub async fn unitops_unitops_list(configuration: &configuration::Configuration, flowsheet_owner: i32) -> Result<Vec<models::UnitOp>, Error<UnitopsUnitopsListError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -5414,6 +5415,7 @@ pub async fn unitops_unitops_list(configuration: &configuration::Configuration, 
     let local_var_uri_str = format!("{}/api/unitops/unitops/", local_var_configuration.base_path);
     let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+    local_var_req_builder = local_var_req_builder.query(&[("flowsheetOwner", &flowsheet_owner.to_string())]);
     if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
         local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
     }

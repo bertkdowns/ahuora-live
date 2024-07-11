@@ -29,9 +29,8 @@ Class | Method | HTTP request | Description
 *CompoundsApi* | [**compounds_compounds_get_valid_property_packages_retrieve**](docs/CompoundsApi.md#compounds_compounds_get_valid_property_packages_retrieve) | **GET** /api/compounds/compounds/{ID}/get_valid_property_packages/ | 
 *CompoundsApi* | [**compounds_compounds_list**](docs/CompoundsApi.md#compounds_compounds_list) | **GET** /api/compounds/compounds/ | 
 *CompoundsApi* | [**compounds_compounds_retrieve**](docs/CompoundsApi.md#compounds_compounds_retrieve) | **GET** /api/compounds/compounds/{ID}/ | 
-*CompoundsApi* | [**compounds_flowsheet_compound_connection_add_connection_create**](docs/CompoundsApi.md#compounds_flowsheet_compound_connection_add_connection_create) | **POST** /api/compounds/flowsheet-compound-connection/add_connection/ | 
-*CompoundsApi* | [**compounds_flowsheet_compound_connection_get_all_connections_retrieve**](docs/CompoundsApi.md#compounds_flowsheet_compound_connection_get_all_connections_retrieve) | **GET** /api/compounds/flowsheet-compound-connection/{id}/get_all_connections/ | 
-*CompoundsApi* | [**compounds_flowsheet_compound_connection_remove_connection_create**](docs/CompoundsApi.md#compounds_flowsheet_compound_connection_remove_connection_create) | **POST** /api/compounds/flowsheet-compound-connection/remove_connection/ | 
+*CompoundsApi* | [**compounds_flowsheet_compounds_bulk_update_create**](docs/CompoundsApi.md#compounds_flowsheet_compounds_bulk_update_create) | **POST** /api/compounds/flowsheet-compounds/bulk_update/ | 
+*CompoundsApi* | [**compounds_flowsheet_compounds_get_all_connections_retrieve**](docs/CompoundsApi.md#compounds_flowsheet_compounds_get_all_connections_retrieve) | **GET** /api/compounds/flowsheet-compounds/get_all_connections/ | 
 *CoreApi* | [**core_connect_flowsheet_create**](docs/CoreApi.md#core_connect_flowsheet_create) | **POST** /api/core/connect-flowsheet/ | 
 *CoreApi* | [**core_connect_new_stream_create**](docs/CoreApi.md#core_connect_new_stream_create) | **POST** /api/core/connect-new-stream/ | 
 *CoreApi* | [**core_connect_objects_create**](docs/CoreApi.md#core_connect_objects_create) | **POST** /api/core/connect-objects/ | 
@@ -57,9 +56,9 @@ Class | Method | HTTP request | Description
 *GraphicsgroupingsApi* | [**graphicsgroupings_partial_update**](docs/GraphicsgroupingsApi.md#graphicsgroupings_partial_update) | **PATCH** /api/graphicsgroupings/{id}/ | 
 *GraphicsgroupingsApi* | [**graphicsgroupings_retrieve**](docs/GraphicsgroupingsApi.md#graphicsgroupings_retrieve) | **GET** /api/graphicsgroupings/{id}/ | 
 *GraphicsgroupingsApi* | [**graphicsgroupings_update**](docs/GraphicsgroupingsApi.md#graphicsgroupings_update) | **PUT** /api/graphicsgroupings/{id}/ | 
-*PropertyPackagesApi* | [**property_packages_flowsheet_property_packages_connection_add_connection_create**](docs/PropertyPackagesApi.md#property_packages_flowsheet_property_packages_connection_add_connection_create) | **POST** /api/property_packages/flowsheet-property_packages-connection/add_connection/ | 
-*PropertyPackagesApi* | [**property_packages_flowsheet_property_packages_connection_get_all_connections_retrieve**](docs/PropertyPackagesApi.md#property_packages_flowsheet_property_packages_connection_get_all_connections_retrieve) | **GET** /api/property_packages/flowsheet-property_packages-connection/{id}/get_all_connections/ | 
-*PropertyPackagesApi* | [**property_packages_flowsheet_property_packages_connection_remove_connection_create**](docs/PropertyPackagesApi.md#property_packages_flowsheet_property_packages_connection_remove_connection_create) | **POST** /api/property_packages/flowsheet-property_packages-connection/remove_connection/ | 
+*PropertyPackagesApi* | [**property_packages_flowsheet_property_packages_bulk_update_create**](docs/PropertyPackagesApi.md#property_packages_flowsheet_property_packages_bulk_update_create) | **POST** /api/property_packages/flowsheet-property_packages/bulk_update/ | 
+*PropertyPackagesApi* | [**property_packages_flowsheet_property_packages_get_all_connections_retrieve**](docs/PropertyPackagesApi.md#property_packages_flowsheet_property_packages_get_all_connections_retrieve) | **GET** /api/property_packages/flowsheet-property_packages/get_all_connections/ | 
+*PropertyPackagesApi* | [**property_packages_flowsheet_property_packages_list**](docs/PropertyPackagesApi.md#property_packages_flowsheet_property_packages_list) | **GET** /api/property_packages/flowsheet-property_packages/ | 
 *PropertyPackagesApi* | [**property_packages_property_packages_list**](docs/PropertyPackagesApi.md#property_packages_property_packages_list) | **GET** /api/property_packages/property_packages/ | 
 *SolveApi* | [**solve_idaes_create**](docs/SolveApi.md#solve_idaes_create) | **POST** /api/solve/idaes/ | 
 *StatusApi* | [**status_retrieve**](docs/StatusApi.md#status_retrieve) | **GET** /api/status/ | 
@@ -234,6 +233,7 @@ Class | Method | HTTP request | Description
  - [AdjustVarTypeEnum](docs/AdjustVarTypeEnum.md)
  - [CalculationMode16dEnum](docs/CalculationMode16dEnum.md)
  - [CompositionBasisEnum](docs/CompositionBasisEnum.md)
+ - [Compound](docs/Compound.md)
  - [Compressor](docs/Compressor.md)
  - [CompressorCalculationModeEnum](docs/CompressorCalculationModeEnum.md)
  - [ConTypeEnum](docs/ConTypeEnum.md)
@@ -257,7 +257,9 @@ Class | Method | HTTP request | Description
  - [FlowDirectionEnum](docs/FlowDirectionEnum.md)
  - [Flowsheet](docs/Flowsheet.md)
  - [FlowsheetCompound](docs/FlowsheetCompound.md)
+ - [FlowsheetCompoundsBulkUpdate](docs/FlowsheetCompoundsBulkUpdate.md)
  - [FlowsheetPropertyPackage](docs/FlowsheetPropertyPackage.md)
+ - [FlowsheetPropertyPackageBulkUpdate](docs/FlowsheetPropertyPackageBulkUpdate.md)
  - [ForcePhaseEnum](docs/ForcePhaseEnum.md)
  - [GraphicObject](docs/GraphicObject.md)
  - [GroupTypeEnum](docs/GroupTypeEnum.md)

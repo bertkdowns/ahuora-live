@@ -2017,12 +2017,15 @@ Name | Type | Description  | Required | Notes
 
 ## unitops_materialstreams_list
 
-> Vec<models::MaterialStream> unitops_materialstreams_list()
+> Vec<models::MaterialStream> unitops_materialstreams_list(flowsheet_owner)
 
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**flowsheet_owner** | **i32** |  | [required] |
 
 ### Return type
 
@@ -4086,12 +4089,15 @@ Name | Type | Description  | Required | Notes
 
 ## unitops_unitops_list
 
-> Vec<models::UnitOp> unitops_unitops_list()
+> Vec<models::UnitOp> unitops_unitops_list(flowsheet_owner)
 
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**flowsheet_owner** | **i32** |  | [required] |
 
 ### Return type
 

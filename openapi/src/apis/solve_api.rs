@@ -24,7 +24,7 @@ pub enum SolveIdaesCreateError {
 
 
 /// Solve endpoint
-pub async fn solve_idaes_create(configuration: &configuration::Configuration, solve_request: Option<models::SolveRequest>) -> Result<(), Error<SolveIdaesCreateError>> {
+pub async fn solve_idaes_create(configuration: &configuration::Configuration, solve_request: models::SolveRequest) -> Result<(), Error<SolveIdaesCreateError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;

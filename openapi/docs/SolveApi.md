@@ -20,7 +20,7 @@ Solve endpoint
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**solve_request** | Option<[**SolveRequest**](SolveRequest.md)> |  |  |
+**solve_request** | [**SolveRequest**](SolveRequest.md) |  | [required] |
 
 ### Return type
 

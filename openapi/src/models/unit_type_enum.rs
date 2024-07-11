@@ -11,8 +11,8 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// UnitTypeEnum : * `accel` - Accel * `activity` - Activity * `activityCoefficient` - Activitycoefficient * `area` - Area * `boilingPointTemperature` - Boilingpointtemperature * `cakeresistance` - Cakeresistance * `cinematic_viscosity` - Cinematic Viscosity * `compressibility` - Compressibility * `compressibilityFactor` - Compressibilityfactor * `deltaP` - Deltap * `deltaT` - Deltat * `density` - Density * `diameter` - Diameter * `distance` - Distance * `enthalpy` - Enthalpy * `entropy` - Entropy * `excessEnthalpy` - Excessenthalpy * `excessEntropy` - Excessentropy * `force` - Force * `foulingfactor` - Foulingfactor * `fugacity` - Fugacity * `fugacityCoefficient` - Fugacitycoefficient * `gor` - Gor * `head` - Head * `heat_transf_coeff` - Heat Transf Coeff * `heatCapacityCp` - Heatcapacitycp * `heatCapacityCv` - Heatcapacitycv * `heatflow` - Heatflow * `idealGasHeatCapacity` - Idealgasheatcapacity * `jouleThomsonCoefficient` - Joulethomsoncoefficient * `kvalue` - Kvalue * `logFugacityCoefficient` - Logfugacitycoefficient * `logKvalue` - Logkvalue * `mass` - Mass * `mass_conc` - Mass Conc * `massflow` - Massflow * `massfraction` - Massfraction * `mediumresistance` - Mediumresistance * `meltingTemperature` - Meltingtemperature * `molar_conc` - Molar Conc * `molar_enthalpy` - Molar Enthalpy * `molar_entropy` - Molar Entropy * `molar_volume` - Molar Volume * `molarflow` - Molarflow * `molarfraction` - Molarfraction * `molecularWeight` - Molecularweight * `pressure` - Pressure * `reac_rate` - Reac Rate * `reac_rate_heterog` - Reac Rate Heterog * `spec_vol` - Spec Vol * `speedOfSound` - Speedofsound * `surfaceTension` - Surfacetension * `temperature` - Temperature * `thermalConductivity` - Thermalconductivity * `thermalConductivityOfLiquid` - Thermalconductivityofliquid * `thermalConductivityOfVapor` - Thermalconductivityofvapor * `thickness` - Thickness * `time` - Time * `vaporPressure` - Vaporpressure * `velocity` - Velocity * `viscosity` - Viscosity * `viscosityOfLiquid` - Viscosityofliquid * `viscosityOfVapor` - Viscosityofvapor * `volume` - Volume * `volumetricFlow` - Volumetricflow * `diffusivity` - Diffusivity * `none` - None * `conductance` - Conductance * `percentage` - Percentage * `rpm` - Rpm * `voltage` - Voltage * `ampere` - Ampere * `resistance` - Resistance * `irradiance` - Irradiance * `currentDensity` - Currentdensity
-/// * `accel` - Accel * `activity` - Activity * `activityCoefficient` - Activitycoefficient * `area` - Area * `boilingPointTemperature` - Boilingpointtemperature * `cakeresistance` - Cakeresistance * `cinematic_viscosity` - Cinematic Viscosity * `compressibility` - Compressibility * `compressibilityFactor` - Compressibilityfactor * `deltaP` - Deltap * `deltaT` - Deltat * `density` - Density * `diameter` - Diameter * `distance` - Distance * `enthalpy` - Enthalpy * `entropy` - Entropy * `excessEnthalpy` - Excessenthalpy * `excessEntropy` - Excessentropy * `force` - Force * `foulingfactor` - Foulingfactor * `fugacity` - Fugacity * `fugacityCoefficient` - Fugacitycoefficient * `gor` - Gor * `head` - Head * `heat_transf_coeff` - Heat Transf Coeff * `heatCapacityCp` - Heatcapacitycp * `heatCapacityCv` - Heatcapacitycv * `heatflow` - Heatflow * `idealGasHeatCapacity` - Idealgasheatcapacity * `jouleThomsonCoefficient` - Joulethomsoncoefficient * `kvalue` - Kvalue * `logFugacityCoefficient` - Logfugacitycoefficient * `logKvalue` - Logkvalue * `mass` - Mass * `mass_conc` - Mass Conc * `massflow` - Massflow * `massfraction` - Massfraction * `mediumresistance` - Mediumresistance * `meltingTemperature` - Meltingtemperature * `molar_conc` - Molar Conc * `molar_enthalpy` - Molar Enthalpy * `molar_entropy` - Molar Entropy * `molar_volume` - Molar Volume * `molarflow` - Molarflow * `molarfraction` - Molarfraction * `molecularWeight` - Molecularweight * `pressure` - Pressure * `reac_rate` - Reac Rate * `reac_rate_heterog` - Reac Rate Heterog * `spec_vol` - Spec Vol * `speedOfSound` - Speedofsound * `surfaceTension` - Surfacetension * `temperature` - Temperature * `thermalConductivity` - Thermalconductivity * `thermalConductivityOfLiquid` - Thermalconductivityofliquid * `thermalConductivityOfVapor` - Thermalconductivityofvapor * `thickness` - Thickness * `time` - Time * `vaporPressure` - Vaporpressure * `velocity` - Velocity * `viscosity` - Viscosity * `viscosityOfLiquid` - Viscosityofliquid * `viscosityOfVapor` - Viscosityofvapor * `volume` - Volume * `volumetricFlow` - Volumetricflow * `diffusivity` - Diffusivity * `none` - None * `conductance` - Conductance * `percentage` - Percentage * `rpm` - Rpm * `voltage` - Voltage * `ampere` - Ampere * `resistance` - Resistance * `irradiance` - Irradiance * `currentDensity` - Currentdensity
+/// UnitTypeEnum : * `accel` - Accel * `activity` - Activity * `activityCoefficient` - Activitycoefficient * `area` - Area * `boilingPointTemperature` - Boilingpointtemperature * `cakeresistance` - Cakeresistance * `cinematic_viscosity` - Cinematic Viscosity * `compressibility` - Compressibility * `compressibilityFactor` - Compressibilityfactor * `density` - Density * `diameter` - Diameter * `distance` - Distance * `enthalpy` - Enthalpy * `entropy` - Entropy * `excessEnthalpy` - Excessenthalpy * `excessEntropy` - Excessentropy * `force` - Force * `foulingfactor` - Foulingfactor * `fugacity` - Fugacity * `fugacityCoefficient` - Fugacitycoefficient * `gor` - Gor * `head` - Head * `heat_transf_coeff` - Heat Transf Coeff * `heatCapacityCv` - Heatcapacitycv * `heatflow` - Heatflow * `idealGasHeatCapacity` - Idealgasheatcapacity * `jouleThomsonCoefficient` - Joulethomsoncoefficient * `kvalue` - Kvalue * `logFugacityCoefficient` - Logfugacitycoefficient * `logKvalue` - Logkvalue * `mass` - Mass * `mass_conc` - Mass Conc * `massflow` - Massflow * `massfraction` - Massfraction * `mediumresistance` - Mediumresistance * `meltingTemperature` - Meltingtemperature * `molar_conc` - Molar Conc * `molar_enthalpy` - Molar Enthalpy * `molar_entropy` - Molar Entropy * `molar_volume` - Molar Volume * `molarflow` - Molarflow * `molarfraction` - Molarfraction * `molecularWeight` - Molecularweight * `pressure` - Pressure * `reac_rate` - Reac Rate * `reac_rate_heterog` - Reac Rate Heterog * `spec_vol` - Spec Vol * `surfaceTension` - Surfacetension * `temperature` - Temperature * `thermalConductivity` - Thermalconductivity * `thermalConductivityOfLiquid` - Thermalconductivityofliquid * `thermalConductivityOfVapor` - Thermalconductivityofvapor * `thickness` - Thickness * `time` - Time * `vaporPressure` - Vaporpressure * `velocity` - Velocity * `viscosity` - Viscosity * `viscosityOfLiquid` - Viscosityofliquid * `viscosityOfVapor` - Viscosityofvapor * `volume` - Volume * `volumetricFlow` - Volumetricflow * `diffusivity` - Diffusivity * `none` - None * `conductance` - Conductance * `ratio` - Ratio * `rpm` - Rpm * `voltage` - Voltage * `ampere` - Ampere * `resistance` - Resistance * `irradiance` - Irradiance * `currentDensity` - Currentdensity
+/// * `accel` - Accel * `activity` - Activity * `activityCoefficient` - Activitycoefficient * `area` - Area * `boilingPointTemperature` - Boilingpointtemperature * `cakeresistance` - Cakeresistance * `cinematic_viscosity` - Cinematic Viscosity * `compressibility` - Compressibility * `compressibilityFactor` - Compressibilityfactor * `density` - Density * `diameter` - Diameter * `distance` - Distance * `enthalpy` - Enthalpy * `entropy` - Entropy * `excessEnthalpy` - Excessenthalpy * `excessEntropy` - Excessentropy * `force` - Force * `foulingfactor` - Foulingfactor * `fugacity` - Fugacity * `fugacityCoefficient` - Fugacitycoefficient * `gor` - Gor * `head` - Head * `heat_transf_coeff` - Heat Transf Coeff * `heatCapacityCv` - Heatcapacitycv * `heatflow` - Heatflow * `idealGasHeatCapacity` - Idealgasheatcapacity * `jouleThomsonCoefficient` - Joulethomsoncoefficient * `kvalue` - Kvalue * `logFugacityCoefficient` - Logfugacitycoefficient * `logKvalue` - Logkvalue * `mass` - Mass * `mass_conc` - Mass Conc * `massflow` - Massflow * `massfraction` - Massfraction * `mediumresistance` - Mediumresistance * `meltingTemperature` - Meltingtemperature * `molar_conc` - Molar Conc * `molar_enthalpy` - Molar Enthalpy * `molar_entropy` - Molar Entropy * `molar_volume` - Molar Volume * `molarflow` - Molarflow * `molarfraction` - Molarfraction * `molecularWeight` - Molecularweight * `pressure` - Pressure * `reac_rate` - Reac Rate * `reac_rate_heterog` - Reac Rate Heterog * `spec_vol` - Spec Vol * `surfaceTension` - Surfacetension * `temperature` - Temperature * `thermalConductivity` - Thermalconductivity * `thermalConductivityOfLiquid` - Thermalconductivityofliquid * `thermalConductivityOfVapor` - Thermalconductivityofvapor * `thickness` - Thickness * `time` - Time * `vaporPressure` - Vaporpressure * `velocity` - Velocity * `viscosity` - Viscosity * `viscosityOfLiquid` - Viscosityofliquid * `viscosityOfVapor` - Viscosityofvapor * `volume` - Volume * `volumetricFlow` - Volumetricflow * `diffusivity` - Diffusivity * `none` - None * `conductance` - Conductance * `ratio` - Ratio * `rpm` - Rpm * `voltage` - Voltage * `ampere` - Ampere * `resistance` - Resistance * `irradiance` - Irradiance * `currentDensity` - Currentdensity
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum UnitTypeEnum {
     #[serde(rename = "accel")]
@@ -33,10 +33,6 @@ pub enum UnitTypeEnum {
     Compressibility,
     #[serde(rename = "compressibilityFactor")]
     CompressibilityFactor,
-    #[serde(rename = "deltaP")]
-    DeltaP,
-    #[serde(rename = "deltaT")]
-    DeltaT,
     #[serde(rename = "density")]
     Density,
     #[serde(rename = "diameter")]
@@ -65,8 +61,6 @@ pub enum UnitTypeEnum {
     Head,
     #[serde(rename = "heat_transf_coeff")]
     HeatTransfCoeff,
-    #[serde(rename = "heatCapacityCp")]
-    HeatCapacityCp,
     #[serde(rename = "heatCapacityCv")]
     HeatCapacityCv,
     #[serde(rename = "heatflow")]
@@ -115,8 +109,6 @@ pub enum UnitTypeEnum {
     ReacRateHeterog,
     #[serde(rename = "spec_vol")]
     SpecVol,
-    #[serde(rename = "speedOfSound")]
-    SpeedOfSound,
     #[serde(rename = "surfaceTension")]
     SurfaceTension,
     #[serde(rename = "temperature")]
@@ -151,8 +143,8 @@ pub enum UnitTypeEnum {
     None,
     #[serde(rename = "conductance")]
     Conductance,
-    #[serde(rename = "percentage")]
-    Percentage,
+    #[serde(rename = "ratio")]
+    Ratio,
     #[serde(rename = "rpm")]
     Rpm,
     #[serde(rename = "voltage")]
@@ -180,8 +172,6 @@ impl std::fmt::Display for UnitTypeEnum {
             Self::CinematicViscosity => write!(f, "cinematic_viscosity"),
             Self::Compressibility => write!(f, "compressibility"),
             Self::CompressibilityFactor => write!(f, "compressibilityFactor"),
-            Self::DeltaP => write!(f, "deltaP"),
-            Self::DeltaT => write!(f, "deltaT"),
             Self::Density => write!(f, "density"),
             Self::Diameter => write!(f, "diameter"),
             Self::Distance => write!(f, "distance"),
@@ -196,7 +186,6 @@ impl std::fmt::Display for UnitTypeEnum {
             Self::Gor => write!(f, "gor"),
             Self::Head => write!(f, "head"),
             Self::HeatTransfCoeff => write!(f, "heat_transf_coeff"),
-            Self::HeatCapacityCp => write!(f, "heatCapacityCp"),
             Self::HeatCapacityCv => write!(f, "heatCapacityCv"),
             Self::Heatflow => write!(f, "heatflow"),
             Self::IdealGasHeatCapacity => write!(f, "idealGasHeatCapacity"),
@@ -221,7 +210,6 @@ impl std::fmt::Display for UnitTypeEnum {
             Self::ReacRate => write!(f, "reac_rate"),
             Self::ReacRateHeterog => write!(f, "reac_rate_heterog"),
             Self::SpecVol => write!(f, "spec_vol"),
-            Self::SpeedOfSound => write!(f, "speedOfSound"),
             Self::SurfaceTension => write!(f, "surfaceTension"),
             Self::Temperature => write!(f, "temperature"),
             Self::ThermalConductivity => write!(f, "thermalConductivity"),
@@ -239,7 +227,7 @@ impl std::fmt::Display for UnitTypeEnum {
             Self::Diffusivity => write!(f, "diffusivity"),
             Self::None => write!(f, "none"),
             Self::Conductance => write!(f, "conductance"),
-            Self::Percentage => write!(f, "percentage"),
+            Self::Ratio => write!(f, "ratio"),
             Self::Rpm => write!(f, "rpm"),
             Self::Voltage => write!(f, "voltage"),
             Self::Ampere => write!(f, "ampere"),

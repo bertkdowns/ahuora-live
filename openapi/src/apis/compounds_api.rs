@@ -36,30 +36,23 @@ pub enum CompoundsCompoundsRetrieveError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`compounds_flowsheet_compound_connection_add_connection_create`]
+/// struct for typed errors of method [`compounds_flowsheet_compounds_bulk_update_create`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum CompoundsFlowsheetCompoundConnectionAddConnectionCreateError {
+pub enum CompoundsFlowsheetCompoundsBulkUpdateCreateError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`compounds_flowsheet_compound_connection_get_all_connections_retrieve`]
+/// struct for typed errors of method [`compounds_flowsheet_compounds_get_all_connections_retrieve`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum CompoundsFlowsheetCompoundConnectionGetAllConnectionsRetrieveError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`compounds_flowsheet_compound_connection_remove_connection_create`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CompoundsFlowsheetCompoundConnectionRemoveConnectionCreateError {
+pub enum CompoundsFlowsheetCompoundsGetAllConnectionsRetrieveError {
     UnknownValue(serde_json::Value),
 }
 
 
 /// Retrieves all valid property packages for single compound (based on compound ID) a \"valid\" property package is one where an entry exists for that compound type  Parameters: - id: The compound ID  Returns: - list of property packages
-pub async fn compounds_compounds_get_valid_property_packages_retrieve(configuration: &configuration::Configuration, id: i32) -> Result<std::collections::HashMap<String, serde_json::Value>, Error<CompoundsCompoundsGetValidPropertyPackagesRetrieveError>> {
+pub async fn compounds_compounds_get_valid_property_packages_retrieve(configuration: &configuration::Configuration, id: i32) -> Result<models::Compound, Error<CompoundsCompoundsGetValidPropertyPackagesRetrieveError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -89,7 +82,7 @@ pub async fn compounds_compounds_get_valid_property_packages_retrieve(configurat
     }
 }
 
-pub async fn compounds_compounds_list(configuration: &configuration::Configuration, ) -> Result<Vec<std::collections::HashMap<String, serde_json::Value>>, Error<CompoundsCompoundsListError>> {
+pub async fn compounds_compounds_list(configuration: &configuration::Configuration, ) -> Result<Vec<models::Compound>, Error<CompoundsCompoundsListError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -119,7 +112,7 @@ pub async fn compounds_compounds_list(configuration: &configuration::Configurati
     }
 }
 
-pub async fn compounds_compounds_retrieve(configuration: &configuration::Configuration, id: i32) -> Result<std::collections::HashMap<String, serde_json::Value>, Error<CompoundsCompoundsRetrieveError>> {
+pub async fn compounds_compounds_retrieve(configuration: &configuration::Configuration, id: i32) -> Result<models::Compound, Error<CompoundsCompoundsRetrieveError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -149,22 +142,23 @@ pub async fn compounds_compounds_retrieve(configuration: &configuration::Configu
     }
 }
 
-/// Creating new link between flowsheet and compound
-pub async fn compounds_flowsheet_compound_connection_add_connection_create(configuration: &configuration::Configuration, flowsheet_compound: models::FlowsheetCompound) -> Result<models::FlowsheetCompound, Error<CompoundsFlowsheetCompoundConnectionAddConnectionCreateError>> {
+/// Create and delete multiple connections at once.  Parameters: - flowsheetId: The flowsheet ID  Request body: - compounds: List of compound IDs  Returns: - None
+pub async fn compounds_flowsheet_compounds_bulk_update_create(configuration: &configuration::Configuration, flowsheet_id: i32, flowsheet_compounds_bulk_update: models::FlowsheetCompoundsBulkUpdate) -> Result<(), Error<CompoundsFlowsheetCompoundsBulkUpdateCreateError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
 
-    let local_var_uri_str = format!("{}/api/compounds/flowsheet-compound-connection/add_connection/", local_var_configuration.base_path);
+    let local_var_uri_str = format!("{}/api/compounds/flowsheet-compounds/bulk_update/", local_var_configuration.base_path);
     let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
+    local_var_req_builder = local_var_req_builder.query(&[("flowsheetId", &flowsheet_id.to_string())]);
     if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
         local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
     }
     if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
         local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
     };
-    local_var_req_builder = local_var_req_builder.json(&flowsheet_compound);
+    local_var_req_builder = local_var_req_builder.json(&flowsheet_compounds_bulk_update);
 
     let local_var_req = local_var_req_builder.build()?;
     let local_var_resp = local_var_client.execute(local_var_req).await?;
@@ -173,23 +167,24 @@ pub async fn compounds_flowsheet_compound_connection_add_connection_create(confi
     let local_var_content = local_var_resp.text().await?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
+        Ok(())
     } else {
-        let local_var_entity: Option<CompoundsFlowsheetCompoundConnectionAddConnectionCreateError> = serde_json::from_str(&local_var_content).ok();
+        let local_var_entity: Option<CompoundsFlowsheetCompoundsBulkUpdateCreateError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
         Err(Error::ResponseError(local_var_error))
     }
 }
 
 /// Retrieve all items associated with the given flowsheet ID.  Parameters: - id: The flowsheet ID  Returns: - list of associated connections
-pub async fn compounds_flowsheet_compound_connection_get_all_connections_retrieve(configuration: &configuration::Configuration, id: i32) -> Result<models::FlowsheetCompound, Error<CompoundsFlowsheetCompoundConnectionGetAllConnectionsRetrieveError>> {
+pub async fn compounds_flowsheet_compounds_get_all_connections_retrieve(configuration: &configuration::Configuration, flowsheet_id: i32) -> Result<models::FlowsheetCompoundsBulkUpdate, Error<CompoundsFlowsheetCompoundsGetAllConnectionsRetrieveError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
 
-    let local_var_uri_str = format!("{}/api/compounds/flowsheet-compound-connection/{id}/get_all_connections/", local_var_configuration.base_path, id=id);
+    let local_var_uri_str = format!("{}/api/compounds/flowsheet-compounds/get_all_connections/", local_var_configuration.base_path);
     let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+    local_var_req_builder = local_var_req_builder.query(&[("flowsheetId", &flowsheet_id.to_string())]);
     if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
         local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
     }
@@ -206,39 +201,7 @@ pub async fn compounds_flowsheet_compound_connection_get_all_connections_retriev
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
     } else {
-        let local_var_entity: Option<CompoundsFlowsheetCompoundConnectionGetAllConnectionsRetrieveError> = serde_json::from_str(&local_var_content).ok();
-        let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
-        Err(Error::ResponseError(local_var_error))
-    }
-}
-
-/// Removing link between flowsheet and compound
-pub async fn compounds_flowsheet_compound_connection_remove_connection_create(configuration: &configuration::Configuration, flowsheet_compound: models::FlowsheetCompound) -> Result<models::FlowsheetCompound, Error<CompoundsFlowsheetCompoundConnectionRemoveConnectionCreateError>> {
-    let local_var_configuration = configuration;
-
-    let local_var_client = &local_var_configuration.client;
-
-    let local_var_uri_str = format!("{}/api/compounds/flowsheet-compound-connection/remove_connection/", local_var_configuration.base_path);
-    let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
-
-    if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-        local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-    }
-    if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-        local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
-    };
-    local_var_req_builder = local_var_req_builder.json(&flowsheet_compound);
-
-    let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-    let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
-
-    if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
-    } else {
-        let local_var_entity: Option<CompoundsFlowsheetCompoundConnectionRemoveConnectionCreateError> = serde_json::from_str(&local_var_content).ok();
+        let local_var_entity: Option<CompoundsFlowsheetCompoundsGetAllConnectionsRetrieveError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
         Err(Error::ResponseError(local_var_error))
     }

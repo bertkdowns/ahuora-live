@@ -1,12 +1,10 @@
-# FlowsheetPropertyPackage
+# FlowsheetPropertyPackageBulkUpdate
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**flowsheet** | **i32** |  | [readonly]
-**property_package** | **i32** |  | [readonly]
-**property_package_name** | **String** |  | [readonly]
+**property_packages** | **Vec<i32>** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
