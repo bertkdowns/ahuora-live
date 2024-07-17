@@ -2,8 +2,13 @@ use openapi::apis::core_api::core_propertyinfo_partial_update;
 use openapi::apis::unitops_api::unitops_unitops_list;
 use openapi::apis::unitops_api::unitops_materialstreams_list;
 use openapi::apis::configuration::Configuration;
+use openapi::apis::solve_api::solve_idaes_create;
+use openapi::apis::core_api::core_propertyinfo_retrieve;
+use openapi::models::PropertyInfo;
+
 use openapi::models::MaterialStream;
 use openapi::models:: PatchedPropertyInfo;
+use openapi::models::SolveRequest;
 use openapi::models::UnitOp;
 use serde_json::Value;
 use std::collections::HashMap;
@@ -41,6 +46,14 @@ struct SensorDefinition {
     measurement: &'static str, // The sensor provides this measurement
     unitop: &'static str, // E.g PUMP-0
     propkey: &'static str, // E.g "PROP_HX_TEMP"
+}
+
+#[derive(Debug)]
+struct CalculatedProperty {
+    unitop: &'static str,
+    propkey: &'static str,
+    property_id: i32,
+    value: f64,
 }
 
 
@@ -105,11 +118,10 @@ impl Flowsheet{
 
 
 
-async fn initialise_state(config: &Configuration) -> Result<StateMap, Box<dyn Error>> {
+async fn initialise_state(flowsheet: &Flowsheet) -> Result<StateMap, Box<dyn Error>> {
     let mut recent_values: StateMap = HashMap::new();
 
-    // Get the flowsheet
-    let flowsheet = Flowsheet::new(config).await?;
+    
 
     // Iterate through sensor definitions, requesting the latest value for each
     for sensor_definition in SENSOR_DEFINITIONS {
@@ -144,8 +156,31 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let mut configuration = Configuration::new();
     configuration.base_path = "http://localhost:8001".to_owned();
+    // Get the flowsheet
+    let flowsheet = Flowsheet::new(&configuration).await?;
 
-    let mut recent_values: StateMap = initialise_state(&configuration).await?;
+
+
+    let mut calculated_properties = vec![
+        CalculatedProperty {
+            unitop: "PUMP-0",
+            propkey: "PROP_HX_TEMP",
+            property_id: 0,
+            value: 0.0,
+        },
+    ];
+    for calculated_property in calculated_properties.iter_mut() {
+        calculated_property.property_id = match flowsheet.get_property_id(calculated_property.unitop, calculated_property.propkey).await {
+            Some(id) => id,
+            None => {
+                println!("Property not found: {} {}", calculated_property.unitop, calculated_property.propkey);
+                continue;
+            }
+        };
+    }
+
+    
+    let mut recent_values: StateMap = initialise_state(&flowsheet).await?;
 
     // Create a CSV parser that reads data from a file
     let file_path =  "../query_data.csv";
@@ -180,15 +215,24 @@ async fn main() -> Result<(), Box<dyn Error>> {
             Ok(_) => println!("Updated property: {} {}", location, measurement),
             Err(e) => println!("Error updating property: {} {} \n {}", location, measurement, e),
         }
+        // solve with updated value
+        solve_idaes_create(&configuration, SolveRequest {
+            flowsheet_id: FLOWSHEET_ID,
+            debug: Some(true),
+            require_variables_fixed: Some(true),
+        }).await?;
+        // get the updated values that we care about
+        for calculated_property in calculated_properties.iter_mut() {
+            let property_id = calculated_property.property_id;
+            let property_info = core_propertyinfo_retrieve(&configuration, property_id).await?;
+            let value = property_info.value.unwrap().unwrap().as_str().unwrap().parse::<f64>().unwrap();
+            calculated_property.value = value;
+        }
     }
 
     println!("{:?}", recent_values);
+    println!("{:?}", calculated_properties);
 
-    
-
-    let id = 12;
-    
-    
 
     return Ok(());
 }
