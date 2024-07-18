@@ -4,19 +4,14 @@ use openapi::apis::unitops_api::unitops_materialstreams_list;
 use openapi::apis::configuration::Configuration;
 use openapi::apis::solve_api::solve_idaes_create;
 use openapi::apis::core_api::core_propertyinfo_retrieve;
-use openapi::models::PropertyInfo;
-
 use openapi::models::MaterialStream;
 use openapi::models:: PatchedPropertyInfo;
 use openapi::models::SolveRequest;
 use openapi::models::UnitOp;
 use serde_json::Value;
 use std::collections::HashMap;
-use std::io;
 use std::error::Error;
-use csv;
 use serde::Deserialize;
-use std::fs::File;
 
 
 
@@ -63,14 +58,14 @@ struct PropertyState {
     value: Option<f64>,
 }
 
-const FLOWSHEET_ID: i32 = 0;
+const FLOWSHEET_ID: i32 = 5;
 
 const SENSOR_DEFINITIONS: &[SensorDefinition] = &[
     SensorDefinition {
-        location: "PUMP-0",
-        measurement: "PROP_HX_TEMP",
-        unitop: "PUMP-0",
-        propkey: "PROP_HX_TEMP",
+        location: "Wall Plug",
+        measurement: "current_power",
+        unitop: "my_pump",
+        propkey: "PROP_PU_3", // Power Required Property
     },
 ];
 
@@ -80,8 +75,30 @@ struct Flowsheet {
 }
 impl Flowsheet{
     async fn new(config: &Configuration) -> Result<Flowsheet, Box<dyn Error>> {
-        let unitops = unitops_unitops_list(config, FLOWSHEET_ID).await?;
-        let materialstreams = unitops_materialstreams_list(config, FLOWSHEET_ID).await?;
+        let unitops = match unitops_unitops_list(config, FLOWSHEET_ID).await {
+            Ok(unitops) => unitops,
+            Err(e) => {
+                match e {
+                    openapi::apis::Error::Reqwest(_) => todo!(),
+                    openapi::apis::Error::Serde(e) => {
+                        
+                        eprintln!("Error deserializing unitops: {}", e);
+                        return Err(Box::new(e));
+                    },
+                    openapi::apis::Error::Io(_) => todo!(),
+                    openapi::apis::Error::ResponseError(_) => todo!(),
+                }
+                eprintln!("Error getting unitops: {}", e);
+                return Err(Box::new(e));
+            }
+        };
+        let materialstreams = match unitops_materialstreams_list(config, FLOWSHEET_ID).await {
+            Ok(materialstreams) => materialstreams,
+            Err(e) => {
+                eprintln!("Error getting materialstreams: {}", e);
+                return Err(Box::new(e));
+            }
+        };
         Ok(Flowsheet { unitops, materialstreams })
     } 
 
@@ -121,18 +138,16 @@ impl Flowsheet{
 async fn initialise_state(flowsheet: &Flowsheet) -> Result<StateMap, Box<dyn Error>> {
     let mut recent_values: StateMap = HashMap::new();
 
-    
-
     // Iterate through sensor definitions, requesting the latest value for each
     for sensor_definition in SENSOR_DEFINITIONS {
         // Get the property id for the sensor (using the unitop name and propkey)
         let property_id = match flowsheet.get_property_id(sensor_definition.unitop, sensor_definition.propkey).await {
-            Some(id) => id,
+            Some(id) => Some(id),
             None => {
-                println!("Property not found: {} {}", sensor_definition.unitop, sensor_definition.propkey);
+                eprintln!("Property not found: {} {}", sensor_definition.unitop, sensor_definition.propkey);
                 continue;
             }
-        };
+        }.ok_or_else(|| format!("Property not found: {} {}", sensor_definition.unitop, sensor_definition.propkey))?;
 
         // Insert the value into the hashmap
         let location_map = recent_values
@@ -145,7 +160,7 @@ async fn initialise_state(flowsheet: &Flowsheet) -> Result<StateMap, Box<dyn Err
         location_map.insert(sensor_definition.measurement.to_string(), property_state);
     }
 
-    return Ok(recent_values);
+    Ok(recent_values)
 }
 
 
@@ -157,14 +172,25 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let mut configuration = Configuration::new();
     configuration.base_path = "http://localhost:8001".to_owned();
     // Get the flowsheet
-    let flowsheet = Flowsheet::new(&configuration).await?;
+    let flowsheet = match Flowsheet::new(&configuration).await {
+        Ok(flowsheet) => flowsheet,
+        Err(e) => {
+            println!("Error getting flowsheet: {}", e);
+            return Ok(());
+        }
+    };
 
 
 
     let mut calculated_properties = vec![
         CalculatedProperty {
-            unitop: "PUMP-0",
-            propkey: "PROP_HX_TEMP",
+            unitop: "pump_outlet",
+            propkey: "PROP_MS_1", // Pressure
+            property_id: 0,
+            value: 0.0,
+        }, CalculatedProperty {
+            unitop: "pump_outlet",
+            propkey: "PROP_MS_0", // Temperature
             property_id: 0,
             value: 0.0,
         },
@@ -180,14 +206,26 @@ async fn main() -> Result<(), Box<dyn Error>> {
     }
 
     
-    let mut recent_values: StateMap = initialise_state(&flowsheet).await?;
+    let mut recent_values: StateMap = match initialise_state(&flowsheet).await {
+        Ok(state) => state,
+        Err(e) => {
+            println!("Error initialising state: {}", e);
+            return Ok(());
+        }
+    };
 
     // Create a CSV parser that reads data from a file
-    let file_path =  "../query_data.csv";
+    let file_path =  "./example_data.csv"; // or for real data use"../query_data.csv";
     let mut rdr = csv::Reader::from_path(file_path)?;
 
     for result in rdr.deserialize() {
-        let record: Record = result?;
+        let record: Record = match result {
+            Ok(record) => record,
+            Err(e) => {
+                println!("Error reading csv record: {}", e);
+                continue;
+            }
+        };
         let location = record.location;
         let measurement = record._measurement;
         let value = record._value;
@@ -224,7 +262,13 @@ async fn main() -> Result<(), Box<dyn Error>> {
         // get the updated values that we care about
         for calculated_property in calculated_properties.iter_mut() {
             let property_id = calculated_property.property_id;
-            let property_info = core_propertyinfo_retrieve(&configuration, property_id).await?;
+            let property_info = match core_propertyinfo_retrieve(&configuration, property_id).await {
+                Ok(info) => info,
+                Err(e) => {
+                    println!("Error getting property info: {}", e);
+                    continue;
+                }
+            };
             let value = property_info.value.unwrap().unwrap().as_str().unwrap().parse::<f64>().unwrap();
             calculated_property.value = value;
         }
