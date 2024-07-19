@@ -58,7 +58,7 @@ struct PropertyState {
     value: Option<f64>,
 }
 
-const FLOWSHEET_ID: i32 = 5;
+const FLOWSHEET_ID: i32 = 12;
 
 const SENSOR_DEFINITIONS: &[SensorDefinition] = &[
     SensorDefinition {
@@ -78,16 +78,6 @@ impl Flowsheet{
         let unitops = match unitops_unitops_list(config, FLOWSHEET_ID).await {
             Ok(unitops) => unitops,
             Err(e) => {
-                match e {
-                    openapi::apis::Error::Reqwest(_) => todo!(),
-                    openapi::apis::Error::Serde(e) => {
-                        
-                        eprintln!("Error deserializing unitops: {}", e);
-                        return Err(Box::new(e));
-                    },
-                    openapi::apis::Error::Io(_) => todo!(),
-                    openapi::apis::Error::ResponseError(_) => todo!(),
-                }
                 eprintln!("Error getting unitops: {}", e);
                 return Err(Box::new(e));
             }
@@ -105,8 +95,8 @@ impl Flowsheet{
     async fn get_property_id(&self, unitop: &str, propkey: &str ) -> Option<i32> {
         // get the unit ops with the unitops_list query, and iterate through them to find the one with the correct name
         for unitop_info in self.unitops.iter() {
-            if unitop_info.name == unitop {
-                let properties = unitop_info.properties.as_ref().unwrap();
+            if unitop_info.component_name.as_ref()? == unitop {
+                let properties = unitop_info.properties.as_ref()?;
                 // get the properties of the unit op
                 for property in properties.contained_properties.iter() {
                     if property.prop_key.as_ref().unwrap() == propkey {
@@ -117,7 +107,8 @@ impl Flowsheet{
         }
         // If not a unit op, do the same thing with material streams
         for materialstream_info in self.materialstreams.iter() {
-            if &materialstream_info.name == unitop {
+            println!("{:?}", materialstream_info.component_name);
+            if materialstream_info.component_name.as_ref()? == unitop {
                 // get the properties of the unit op
                 for property in materialstream_info.properties.as_ref().unwrap().contained_properties.iter() {
                     if property.prop_key.as_ref().unwrap() == propkey {
@@ -148,7 +139,7 @@ async fn initialise_state(flowsheet: &Flowsheet) -> Result<StateMap, Box<dyn Err
                 continue;
             }
         }.ok_or_else(|| format!("Property not found: {} {}", sensor_definition.unitop, sensor_definition.propkey))?;
-
+        println!("Property ID: {}", property_id);
         // Insert the value into the hashmap
         let location_map = recent_values
             .entry(sensor_definition.location.to_string())
@@ -254,11 +245,15 @@ async fn main() -> Result<(), Box<dyn Error>> {
             Err(e) => println!("Error updating property: {} {} \n {}", location, measurement, e),
         }
         // solve with updated value
-        solve_idaes_create(&configuration, SolveRequest {
+        match solve_idaes_create(&configuration, SolveRequest {
             flowsheet_id: FLOWSHEET_ID,
             debug: Some(true),
             require_variables_fixed: Some(true),
-        }).await?;
+        }).await {
+            Ok(_) => println!("Solved with updated value: {} {}", location, measurement),
+            Err(_) => println!("Error solving with updated value: {} {}", location, measurement),
+        }
+        
         // get the updated values that we care about
         for calculated_property in calculated_properties.iter_mut() {
             let property_id = calculated_property.property_id;
@@ -269,13 +264,20 @@ async fn main() -> Result<(), Box<dyn Error>> {
                     continue;
                 }
             };
-            let value = property_info.value.unwrap().unwrap().as_str().unwrap().parse::<f64>().unwrap();
+            let value = match property_info.value.unwrap().unwrap(){
+                Value::Number(n) => n.as_f64().unwrap(),
+                _ => {
+                    println!("Unexpected value type");
+                    continue;
+                }
+            
+            };
             calculated_property.value = value;
         }
+        println!("{:?}", calculated_properties);
     }
-
     println!("{:?}", recent_values);
-    println!("{:?}", calculated_properties);
+    
 
 
     return Ok(());
