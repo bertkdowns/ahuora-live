@@ -1,21 +1,16 @@
 use openapi::apis::core_api::core_propertyinfo_partial_update;
-use openapi::apis::unitops_api::unitops_unitops_list;
-use openapi::apis::unitops_api::unitops_materialstreams_list;
 use openapi::apis::configuration::Configuration;
 use openapi::apis::solve_api::solve_idaes_create;
 use openapi::apis::core_api::core_propertyinfo_retrieve;
-use openapi::models::MaterialStream;
 use openapi::models:: PatchedPropertyInfo;
 use openapi::models::SolveRequest;
-use openapi::models::UnitOp;
 use serde_json::Value;
 use std::collections::HashMap;
 use std::error::Error;
 use serde::Deserialize;
+use flowsheet::Flowsheet;
 
-
-
-
+mod flowsheet;
 
 type Location = String;
 type Measurement = String;
@@ -51,7 +46,6 @@ struct CalculatedProperty {
     value: f64,
 }
 
-
 #[derive(Debug)]
 struct PropertyState {
     property_id: i32,
@@ -68,63 +62,6 @@ const SENSOR_DEFINITIONS: &[SensorDefinition] = &[
         propkey: "PROP_PU_3", // Power Required Property
     },
 ];
-
-struct Flowsheet {
-    unitops: Vec<UnitOp>,
-    materialstreams: Vec<MaterialStream>,
-}
-impl Flowsheet{
-    async fn new(config: &Configuration) -> Result<Flowsheet, Box<dyn Error>> {
-        let unitops = match unitops_unitops_list(config, FLOWSHEET_ID).await {
-            Ok(unitops) => unitops,
-            Err(e) => {
-                eprintln!("Error getting unitops: {}", e);
-                return Err(Box::new(e));
-            }
-        };
-        let materialstreams = match unitops_materialstreams_list(config, FLOWSHEET_ID).await {
-            Ok(materialstreams) => materialstreams,
-            Err(e) => {
-                eprintln!("Error getting materialstreams: {}", e);
-                return Err(Box::new(e));
-            }
-        };
-        Ok(Flowsheet { unitops, materialstreams })
-    } 
-
-    async fn get_property_id(&self, unitop: &str, propkey: &str ) -> Option<i32> {
-        // get the unit ops with the unitops_list query, and iterate through them to find the one with the correct name
-        for unitop_info in self.unitops.iter() {
-            if unitop_info.component_name.as_ref()? == unitop {
-                let properties = unitop_info.properties.as_ref()?;
-                // get the properties of the unit op
-                for property in properties.contained_properties.iter() {
-                    if property.prop_key.as_ref().unwrap() == propkey {
-                        return Some(property.id);
-                    }
-                }
-            }
-        }
-        // If not a unit op, do the same thing with material streams
-        for materialstream_info in self.materialstreams.iter() {
-            println!("{:?}", materialstream_info.component_name);
-            if materialstream_info.component_name.as_ref()? == unitop {
-                // get the properties of the unit op
-                for property in materialstream_info.properties.as_ref().unwrap().contained_properties.iter() {
-                    if property.prop_key.as_ref().unwrap() == propkey {
-                        return Some(property.id);
-                    }
-                }
-            }
-        }
-        return None;
-    }
-}
-
-
-
-
-
 
 async fn initialise_state(flowsheet: &Flowsheet) -> Result<StateMap, Box<dyn Error>> {
     let mut recent_values: StateMap = HashMap::new();
@@ -163,7 +100,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let mut configuration = Configuration::new();
     configuration.base_path = "http://localhost:8001".to_owned();
     // Get the flowsheet
-    let flowsheet = match Flowsheet::new(&configuration).await {
+    let flowsheet = match Flowsheet::new(&configuration,FLOWSHEET_ID).await {
         Ok(flowsheet) => flowsheet,
         Err(e) => {
             println!("Error getting flowsheet: {}", e);
