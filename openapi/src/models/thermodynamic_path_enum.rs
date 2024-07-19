@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// ThermodynamicPathEnum : * `Adiabatic` - Adiabatic * `Polytropic` - Polytropic
 /// * `Adiabatic` - Adiabatic * `Polytropic` - Polytropic
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

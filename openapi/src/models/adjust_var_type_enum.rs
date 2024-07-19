@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// AdjustVarTypeEnum : * `Manipulated` - Manipulated * `Controlled` - Controlled * `Reference` - Reference * `None` - Noneselected
 /// * `Manipulated` - Manipulated * `Controlled` - Controlled * `Reference` - Reference * `None` - Noneselected
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

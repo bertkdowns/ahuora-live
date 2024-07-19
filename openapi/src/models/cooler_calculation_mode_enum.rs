@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// CoolerCalculationModeEnum : * `HeatRemoved` - Heatremoved * `OutletTemperature` - Outlettemperature * `OutletVaporFraction` - Outletvaporfraction * `TemperatureChange` - Temperaturechange * `EnergyStream` - Energystream
 /// * `HeatRemoved` - Heatremoved * `OutletTemperature` - Outlettemperature * `OutletVaporFraction` - Outletvaporfraction * `TemperatureChange` - Temperaturechange * `EnergyStream` - Energystream
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

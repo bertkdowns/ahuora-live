@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// GroupTypeEnum : * `UserSelected` - Userselected * `Threshold` - Threshold * `Abstract` - Abstract
 /// * `UserSelected` - Userselected * `Threshold` - Threshold * `Abstract` - Abstract
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

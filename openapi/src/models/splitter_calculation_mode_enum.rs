@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// SplitterCalculationModeEnum : * `SplitRatios` - Splitratios * `StreamMassFlowSpec` - Streammassflowspec * `StreamMoleFlowSpec` - Streammoleflowspec
 /// * `SplitRatios` - Splitratios * `StreamMassFlowSpec` - Streammassflowspec * `StreamMoleFlowSpec` - Streammoleflowspec
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

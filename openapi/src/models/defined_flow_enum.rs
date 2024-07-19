@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// DefinedFlowEnum : * `Mass` - Mass * `Mole` - Mole * `Volumetric` - Volumetric
 /// * `Mass` - Mass * `Mole` - Mole * `Volumetric` - Volumetric
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

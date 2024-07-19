@@ -11,29 +11,27 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+use serde_repr::{Serialize_repr,Deserialize_repr};
 /// PressureDropCorrelationEnum : * `0` - Beggsbrill * `1` - Lockhartmartinelli * `2` - Petalasaziz
 /// * `0` - Beggsbrill * `1` - Lockhartmartinelli * `2` - Petalasaziz
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[repr(i64)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize_repr, Deserialize_repr)]
 pub enum PressureDropCorrelationEnum {
-    #[serde(rename = "0")]
-    Variant0,
-    #[serde(rename = "1")]
-    Variant1,
-    #[serde(rename = "2")]
-    Variant2,
+    Variant0 = 0,
+    Variant1 = 1,
+    Variant2 = 2,
 
 }
 
-impl std::fmt::Display for PressureDropCorrelationEnum {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl ToString for PressureDropCorrelationEnum {
+    fn to_string(&self) -> String {
         match self {
-            Self::Variant0 => write!(f, "0"),
-            Self::Variant1 => write!(f, "1"),
-            Self::Variant2 => write!(f, "2"),
+            Self::Variant0 => String::from("0"),
+            Self::Variant1 => String::from("1"),
+            Self::Variant2 => String::from("2"),
         }
     }
 }
-
 impl Default for PressureDropCorrelationEnum {
     fn default() -> PressureDropCorrelationEnum {
         Self::Variant0

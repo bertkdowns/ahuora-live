@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// RecycleCalculationModeEnum : * `None` - Noneselected * `Wegstein` - Wegstein * `Dominant_Eigenvalue` - Dominant Eigenvalue * `GlobalBroyden` - Globalbroyden
 /// * `None` - Noneselected * `Wegstein` - Wegstein * `Dominant_Eigenvalue` - Dominant Eigenvalue * `GlobalBroyden` - Globalbroyden
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

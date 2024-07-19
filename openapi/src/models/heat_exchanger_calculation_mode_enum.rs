@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// HeatExchangerCalculationModeEnum : * `CalcTempHotOut` - Calctemphotout * `CalcTempColdOut` - Calctempcoldout * `CalcBothTemp` - Calcbothtemp * `CalcBothTemp_UA` - Calcbothtemp Ua * `CalcArea` - Calcarea * `ShellandTube_Rating` - Shellandtube Rating * `ShellandTube_CalcFoulingFactor` - Shellandtube Calcfoulingfactor * `PinchPoint` - Pinchpoint * `ThermalEfficiency` - Thermalefficiency * `OutletVaporFraction1` - Outletvaporfraction1 * `OutletVaporFraction2` - Outletvaporfraction2
 /// * `CalcTempHotOut` - Calctemphotout * `CalcTempColdOut` - Calctempcoldout * `CalcBothTemp` - Calcbothtemp * `CalcBothTemp_UA` - Calcbothtemp Ua * `CalcArea` - Calcarea * `ShellandTube_Rating` - Shellandtube Rating * `ShellandTube_CalcFoulingFactor` - Shellandtube Calcfoulingfactor * `PinchPoint` - Pinchpoint * `ThermalEfficiency` - Thermalefficiency * `OutletVaporFraction1` - Outletvaporfraction1 * `OutletVaporFraction2` - Outletvaporfraction2
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// NameEnum : * `Peng-Robinson` - Peng Robinson * `NRTL` - Nrtl
 /// * `Peng-Robinson` - Peng Robinson * `NRTL` - Nrtl
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// PipeCalculationModeEnum : * `Length` - Length * `OutletPressure` - Outletpressure * `OutletTemperature` - Outlettemperature
 /// * `Length` - Length * `OutletPressure` - Outletpressure * `OutletTemperature` - Outlettemperature
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

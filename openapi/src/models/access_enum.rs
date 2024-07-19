@@ -11,32 +11,29 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+use serde_repr::{Serialize_repr,Deserialize_repr};
 /// AccessEnum : * `0` - Ro * `1` - Rw * `2` - Wr * `3` - All
 /// * `0` - Ro * `1` - Rw * `2` - Wr * `3` - All
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[repr(i64)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize_repr, Deserialize_repr)]
 pub enum AccessEnum {
-    #[serde(rename = "0")]
-    Variant0,
-    #[serde(rename = "1")]
-    Variant1,
-    #[serde(rename = "2")]
-    Variant2,
-    #[serde(rename = "3")]
-    Variant3,
+    Variant0 = 0,
+    Variant1 = 1,
+    Variant2 = 2,
+    Variant3 = 3,
 
 }
 
-impl std::fmt::Display for AccessEnum {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl ToString for AccessEnum {
+    fn to_string(&self) -> String {
         match self {
-            Self::Variant0 => write!(f, "0"),
-            Self::Variant1 => write!(f, "1"),
-            Self::Variant2 => write!(f, "2"),
-            Self::Variant3 => write!(f, "3"),
+            Self::Variant0 => String::from("0"),
+            Self::Variant1 => String::from("1"),
+            Self::Variant2 => String::from("2"),
+            Self::Variant3 => String::from("3"),
         }
     }
 }
-
 impl Default for AccessEnum {
     fn default() -> AccessEnum {
         Self::Variant0

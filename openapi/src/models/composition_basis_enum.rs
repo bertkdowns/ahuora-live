@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// CompositionBasisEnum : * `Molar_Fractions` - Molar Fractions * `Mass_Fractions` - Mass Fractions * `Volumetric_Fractions` - Volumetric Fractions * `Molar_Flows` - Molar Flows * `Mass_Flows` - Mass Flows * `Volumetric_Flows` - Volumetric Flows * `DefaultBasis` - Defaultbasis
 /// * `Molar_Fractions` - Molar Fractions * `Mass_Fractions` - Mass Fractions * `Volumetric_Fractions` - Volumetric Fractions * `Molar_Flows` - Molar Flows * `Mass_Flows` - Mass Flows * `Volumetric_Flows` - Volumetric Flows * `DefaultBasis` - Defaultbasis
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

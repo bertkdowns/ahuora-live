@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// CalculationMode16dEnum : * `Average` - Average * `Maximum` - Maximum * `Minimum` - Minimum
 /// * `Average` - Average * `Maximum` - Maximum * `Minimum` - Minimum
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

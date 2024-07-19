@@ -11,26 +11,25 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+use serde_repr::{Serialize_repr,Deserialize_repr};
 /// DefinedTemperatureEnum : * `0` - Hot Fluid * `1` - Cold Fluid
 /// * `0` - Hot Fluid * `1` - Cold Fluid
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[repr(i64)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize_repr, Deserialize_repr)]
 pub enum DefinedTemperatureEnum {
-    #[serde(rename = "0")]
-    Variant0,
-    #[serde(rename = "1")]
-    Variant1,
+    Variant0 = 0,
+    Variant1 = 1,
 
 }
 
-impl std::fmt::Display for DefinedTemperatureEnum {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl ToString for DefinedTemperatureEnum {
+    fn to_string(&self) -> String {
         match self {
-            Self::Variant0 => write!(f, "0"),
-            Self::Variant1 => write!(f, "1"),
+            Self::Variant0 => String::from("0"),
+            Self::Variant1 => String::from("1"),
         }
     }
 }
-
 impl Default for DefinedTemperatureEnum {
     fn default() -> DefinedTemperatureEnum {
         Self::Variant0

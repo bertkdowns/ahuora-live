@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// MaterialStreamCalculationModeEnum : * `Temperature and Pressure` - Temperature And Pressure * `Pressure and Enthalpy` - Pressure And Enthalpy * `Pressure_and Entropy` - Pressure And Entropy * `Pressure and VaporFraction` - Pressure And Vaporfraction * `Temperature and VaporFraction` - Temperature And Vaporfraction * `Pressure and SolidFraction` - Pressure And Solidfraction * `Volume and Temperature` - Volume And Temperature * `Volume and Enthalpy` - Volume And Enthalpy * `Volume and Entropy` - Volume And Entropy
 /// * `Temperature and Pressure` - Temperature And Pressure * `Pressure and Enthalpy` - Pressure And Enthalpy * `Pressure_and Entropy` - Pressure And Entropy * `Pressure and VaporFraction` - Pressure And Vaporfraction * `Temperature and VaporFraction` - Temperature And Vaporfraction * `Pressure and SolidFraction` - Pressure And Solidfraction * `Volume and Temperature` - Volume And Temperature * `Volume and Enthalpy` - Volume And Enthalpy * `Volume and Entropy` - Volume And Entropy
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

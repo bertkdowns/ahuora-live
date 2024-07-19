@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// ExpanderCalculationModeEnum : * `OutletPressure` - Outletpressure * `Delta_P` - Delta P * `PowerGenerated` - Powergenerated * `Head` - Head * `Curves` - Curves
 /// * `OutletPressure` - Outletpressure * `Delta_P` - Delta P * `PowerGenerated` - Powergenerated * `Head` - Head * `Curves` - Curves
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

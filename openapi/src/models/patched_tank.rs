@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PatchedTank {
     #[serde(rename = "simulationObjectId", skip_serializing_if = "Option::is_none")]

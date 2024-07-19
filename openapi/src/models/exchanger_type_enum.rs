@@ -11,44 +11,37 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+use serde_repr::{Serialize_repr,Deserialize_repr};
 /// ExchangerTypeEnum : * `0` - Doublepipe * `1` - Shelltubes E * `2` - Shelltubes F * `3` - Shelltubes G * `4` - Shelltubes H * `5` - Shelltubes J * `6` - Shelltubes K * `7` - Shelltubes X
 /// * `0` - Doublepipe * `1` - Shelltubes E * `2` - Shelltubes F * `3` - Shelltubes G * `4` - Shelltubes H * `5` - Shelltubes J * `6` - Shelltubes K * `7` - Shelltubes X
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[repr(i64)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize_repr, Deserialize_repr)]
 pub enum ExchangerTypeEnum {
-    #[serde(rename = "0")]
-    Variant0,
-    #[serde(rename = "1")]
-    Variant1,
-    #[serde(rename = "2")]
-    Variant2,
-    #[serde(rename = "3")]
-    Variant3,
-    #[serde(rename = "4")]
-    Variant4,
-    #[serde(rename = "5")]
-    Variant5,
-    #[serde(rename = "6")]
-    Variant6,
-    #[serde(rename = "7")]
-    Variant7,
+    Variant0 = 0,
+    Variant1 = 1,
+    Variant2 = 2,
+    Variant3 = 3,
+    Variant4 = 4,
+    Variant5 = 5,
+    Variant6 = 6,
+    Variant7 = 7,
 
 }
 
-impl std::fmt::Display for ExchangerTypeEnum {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl ToString for ExchangerTypeEnum {
+    fn to_string(&self) -> String {
         match self {
-            Self::Variant0 => write!(f, "0"),
-            Self::Variant1 => write!(f, "1"),
-            Self::Variant2 => write!(f, "2"),
-            Self::Variant3 => write!(f, "3"),
-            Self::Variant4 => write!(f, "4"),
-            Self::Variant5 => write!(f, "5"),
-            Self::Variant6 => write!(f, "6"),
-            Self::Variant7 => write!(f, "7"),
+            Self::Variant0 => String::from("0"),
+            Self::Variant1 => String::from("1"),
+            Self::Variant2 => String::from("2"),
+            Self::Variant3 => String::from("3"),
+            Self::Variant4 => String::from("4"),
+            Self::Variant5 => String::from("5"),
+            Self::Variant6 => String::from("6"),
+            Self::Variant7 => String::from("7"),
         }
     }
 }
-
 impl Default for ExchangerTypeEnum {
     fn default() -> ExchangerTypeEnum {
         Self::Variant0

@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// CompressorCalculationModeEnum : * `OutletPressure` - Outletpressure * `Delta_P` - Delta P * `EnergyStream` - Energystream * `PowerRequired` - Powerrequired * `Head` - Head * `Curves` - Curves
 /// * `OutletPressure` - Outletpressure * `Delta_P` - Delta P * `EnergyStream` - Energystream * `PowerRequired` - Powerrequired * `Head` - Head * `Curves` - Curves
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

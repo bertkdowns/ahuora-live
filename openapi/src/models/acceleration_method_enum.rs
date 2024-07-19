@@ -11,29 +11,27 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+use serde_repr::{Serialize_repr,Deserialize_repr};
 /// AccelerationMethodEnum : * `1` - Wegstein * `2` - Dominant Eigenvalue * `3` - Globalbroyden
 /// * `1` - Wegstein * `2` - Dominant Eigenvalue * `3` - Globalbroyden
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[repr(i64)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize_repr, Deserialize_repr)]
 pub enum AccelerationMethodEnum {
-    #[serde(rename = "1")]
-    Variant1,
-    #[serde(rename = "2")]
-    Variant2,
-    #[serde(rename = "3")]
-    Variant3,
+    Variant1 = 1,
+    Variant2 = 2,
+    Variant3 = 3,
 
 }
 
-impl std::fmt::Display for AccelerationMethodEnum {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl ToString for AccelerationMethodEnum {
+    fn to_string(&self) -> String {
         match self {
-            Self::Variant1 => write!(f, "1"),
-            Self::Variant2 => write!(f, "2"),
-            Self::Variant3 => write!(f, "3"),
+            Self::Variant1 => String::from("1"),
+            Self::Variant2 => String::from("2"),
+            Self::Variant3 => String::from("3"),
         }
     }
 }
-
 impl Default for AccelerationMethodEnum {
     fn default() -> AccelerationMethodEnum {
         Self::Variant1

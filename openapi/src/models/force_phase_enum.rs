@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// ForcePhaseEnum : * `None` - Noneselected * `Vapor` - Vapor * `Liquid` - Liquid * `Solid` - Solid * `GlobalDef` - Globaldef
 /// * `None` - Noneselected * `Vapor` - Vapor * `Liquid` - Liquid * `Solid` - Solid * `GlobalDef` - Globaldef
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

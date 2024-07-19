@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// FilterCalculationModeEnum : * `Design` - Design * `Simulation` - Simulation
 /// * `Design` - Design * `Simulation` - Simulation
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

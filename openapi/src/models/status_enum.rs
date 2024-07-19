@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// StatusEnum : * `Calculated` - Calculated * `Calculating` - Calculating * `ErrorCalculating` - Errorcalculating * `Inactive` - Inactive * `Idle` - Idle * `NotCalculated` - Notcalculated * `Modified` - Modified
 /// * `Calculated` - Calculated * `Calculating` - Calculating * `ErrorCalculating` - Errorcalculating * `Inactive` - Inactive * `Idle` - Idle * `NotCalculated` - Notcalculated * `Modified` - Modified
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

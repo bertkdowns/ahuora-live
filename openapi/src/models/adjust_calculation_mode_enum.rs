@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// AdjustCalculationModeEnum : * `Secant` - Secant * `Brent` - Brent * `Newton` - Newton * `IPOPT` - Ipopt
 /// * `Secant` - Secant * `Brent` - Brent * `Newton` - Newton * `IPOPT` - Ipopt
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

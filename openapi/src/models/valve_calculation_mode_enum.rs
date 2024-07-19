@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// ValveCalculationModeEnum : * `Pressure Difference` - Deltap * `Outlet Pressure` - Outletpressure * `KvLiquid` - Kvliquid * `KvGas` - Kvgas * `KvSteam` - Kvsteam * `KvGeneral` - Kvgeneral
 /// * `Pressure Difference` - Deltap * `Outlet Pressure` - Outletpressure * `KvLiquid` - Kvliquid * `KvGas` - Kvgas * `KvSteam` - Kvsteam * `KvGeneral` - Kvgeneral
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

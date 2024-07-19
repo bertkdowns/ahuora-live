@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// PropertyInfoTypeEnum : * `numeric` - Numeric * `dropdown` - Dropdown * `checkbox` - Checkbox * `segmented` - Segmented
 /// * `numeric` - Numeric * `dropdown` - Dropdown * `checkbox` - Checkbox * `segmented` - Segmented
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

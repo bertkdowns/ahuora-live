@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// PumpCalculationModeEnum : * `Pressure Difference` - Delta P * `OutletPressure` - Outletpressure * `EnergyStream` - Energystream * `Curves` - Curves * `Power` - Power
 /// * `Pressure Difference` - Delta P * `OutletPressure` - Outletpressure * `EnergyStream` - Energystream * `Curves` - Curves * `Power` - Power
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

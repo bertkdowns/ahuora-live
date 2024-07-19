@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+
 /// SpecVarTypeEnum : * `Source` - Source * `Target` - Target * `None` - Noneselected
 /// * `Source` - Source * `Target` - Target * `None` - Noneselected
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

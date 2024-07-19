@@ -11,32 +11,29 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+use serde_repr::{Serialize_repr,Deserialize_repr};
 /// TypeC3bEnum : * `3` - Conin * `1` - Conout * `0` - Conen * `2` - Consp
 /// * `3` - Conin * `1` - Conout * `0` - Conen * `2` - Consp
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[repr(i64)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize_repr, Deserialize_repr)]
 pub enum TypeC3bEnum {
-    #[serde(rename = "3")]
-    Variant3,
-    #[serde(rename = "1")]
-    Variant1,
-    #[serde(rename = "0")]
-    Variant0,
-    #[serde(rename = "2")]
-    Variant2,
+    Variant3 = 3,
+    Variant1 = 1,
+    Variant0 = 0,
+    Variant2 = 2,
 
 }
 
-impl std::fmt::Display for TypeC3bEnum {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl ToString for TypeC3bEnum {
+    fn to_string(&self) -> String {
         match self {
-            Self::Variant3 => write!(f, "3"),
-            Self::Variant1 => write!(f, "1"),
-            Self::Variant0 => write!(f, "0"),
-            Self::Variant2 => write!(f, "2"),
+            Self::Variant3 => String::from("3"),
+            Self::Variant1 => String::from("1"),
+            Self::Variant0 => String::from("0"),
+            Self::Variant2 => String::from("2"),
         }
     }
 }
-
 impl Default for TypeC3bEnum {
     fn default() -> TypeC3bEnum {
         Self::Variant3
