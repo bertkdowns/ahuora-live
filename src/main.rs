@@ -7,67 +7,27 @@ use openapi::models::SolveRequest;
 use serde_json::Value;
 use std::collections::HashMap;
 use std::error::Error;
-use serde::Deserialize;
 use flowsheet::Flowsheet;
+use color_eyre::eyre::Result;
 
 mod flowsheet;
+mod structure;
+mod types;
 
-type Location = String;
-type Measurement = String;
+use types::{Measurement, Location, Record, PropertyState};
+
 type StateMap = HashMap<Location,HashMap<Measurement,PropertyState>>;
 
-#[derive(Debug, Deserialize)]
-#[serde()]
-struct Record {
-    // result: f64,
-    // table: f64,
-    // _start: String,
-    // _stop: String,
-    // _time: String,
-    _value: f64,
-    // _field: String,
-    _measurement: Measurement,
-    location: Location,
-    // name: String,
-}
 
-struct SensorDefinition {
-    location: &'static str, // The sensor provides it's location
-    measurement: &'static str, // The sensor provides this measurement
-    unitop: &'static str, // E.g PUMP-0
-    propkey: &'static str, // E.g "PROP_HX_TEMP"
-}
+const FLOWSHEET_ID: i32 = 2;
 
-#[derive(Debug)]
-struct CalculatedProperty {
-    unitop: &'static str,
-    propkey: &'static str,
-    property_id: i32,
-    value: f64,
-}
 
-#[derive(Debug)]
-struct PropertyState {
-    property_id: i32,
-    value: Option<f64>,
-}
-
-const FLOWSHEET_ID: i32 = 12;
-
-const SENSOR_DEFINITIONS: &[SensorDefinition] = &[
-    SensorDefinition {
-        location: "Wall Plug",
-        measurement: "current_power",
-        unitop: "my_pump",
-        propkey: "PROP_PU_3", // Power Required Property
-    },
-];
 
 async fn initialise_state(flowsheet: &Flowsheet) -> Result<StateMap, Box<dyn Error>> {
     let mut recent_values: StateMap = HashMap::new();
 
     // Iterate through sensor definitions, requesting the latest value for each
-    for sensor_definition in SENSOR_DEFINITIONS {
+    for sensor_definition in structure::SENSOR_DEFINITIONS {
         // Get the property id for the sensor (using the unitop name and propkey)
         let property_id = match flowsheet.get_property_id(sensor_definition.unitop, sensor_definition.propkey).await {
             Some(id) => Some(id),
@@ -94,7 +54,7 @@ async fn initialise_state(flowsheet: &Flowsheet) -> Result<StateMap, Box<dyn Err
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-
+    color_eyre::install()?;
     println!("Hello, world!");
 
     let mut configuration = Configuration::new();
@@ -110,19 +70,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
 
 
-    let mut calculated_properties = vec![
-        CalculatedProperty {
-            unitop: "pump_outlet",
-            propkey: "PROP_MS_1", // Pressure
-            property_id: 0,
-            value: 0.0,
-        }, CalculatedProperty {
-            unitop: "pump_outlet",
-            propkey: "PROP_MS_0", // Temperature
-            property_id: 0,
-            value: 0.0,
-        },
-    ];
+    let mut calculated_properties = structure::CALCULATED_PROPERTIES.clone();
     for calculated_property in calculated_properties.iter_mut() {
         calculated_property.property_id = match flowsheet.get_property_id(calculated_property.unitop, calculated_property.propkey).await {
             Some(id) => id,
