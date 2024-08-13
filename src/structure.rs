@@ -1,6 +1,8 @@
 // Defines the structure of the input data
 use super::types::{CalculatedProperty, SensorDefinition};
 
+pub const FLOWSHEET_ID: i32 = 2;
+
 pub const SENSOR_DEFINITIONS: &[SensorDefinition] = &[SensorDefinition {
     location: "Wall Plug",
     measurement: "current_power",
@@ -12,13 +14,13 @@ pub const CALCULATED_PROPERTIES: [CalculatedProperty;2] = [
     CalculatedProperty {
         unitop: "pump_outlet",
         propkey: "PROP_MS_1", // Pressure
-        property_id: 0,
-        value: 0.0,
+        display_name: "Pump Outlet Pressure",
+        ..CalculatedProperty::default_vals()
     },
     CalculatedProperty {
         unitop: "pump_outlet",
         propkey: "PROP_MS_0", // Temperature
-        property_id: 0,
-        value: 0.0,
+        display_name: "Pump Outlet Temperature",
+        ..CalculatedProperty::default_vals()
     },
 ];

@@ -19,7 +19,7 @@ use types::{Measurement, Location, Record, PropertyState};
 type StateMap = HashMap<Location,HashMap<Measurement,PropertyState>>;
 
 
-const FLOWSHEET_ID: i32 = 2;
+
 
 
 
@@ -60,7 +60,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let mut configuration = Configuration::new();
     configuration.base_path = "http://localhost:8001".to_owned();
     // Get the flowsheet
-    let flowsheet = match Flowsheet::new(&configuration,FLOWSHEET_ID).await {
+    let flowsheet = match Flowsheet::new(&configuration,structure::FLOWSHEET_ID).await {
         Ok(flowsheet) => flowsheet,
         Err(e) => {
             println!("Error getting flowsheet: {}", e);

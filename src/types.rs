@@ -29,8 +29,22 @@ pub struct SensorDefinition {
 pub struct CalculatedProperty {
     pub unitop: &'static str,
     pub propkey: &'static str,
+    pub display_name: &'static str,
     pub property_id: i32,
     pub value: f64,
+}
+
+impl CalculatedProperty {
+    // Cant use default::Default because needs to be a const function.
+    pub const fn default_vals() -> Self {
+        Self {
+            unitop: "",
+            propkey: "",
+            display_name: "",
+            property_id: 0,
+            value: 0.0,
+        }
+    }
 }
 
 #[derive(Debug)]

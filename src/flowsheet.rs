@@ -8,7 +8,7 @@ use std::error::Error;
 pub struct Flowsheet {
     unitops: Vec<UnitOp>,
     materialstreams: Vec<MaterialStream>,
-    id: i32,
+    //id: i32,
 }
 
 impl Flowsheet{
@@ -27,7 +27,7 @@ impl Flowsheet{
                 return Err(Box::new(e));
             }
         };
-        Ok(Flowsheet { unitops, materialstreams,id })
+        Ok(Flowsheet { unitops, materialstreams})
     } 
 
     pub async fn get_property_id(&self, unitop: &str, propkey: &str ) -> Option<i32> {
