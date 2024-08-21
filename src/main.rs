@@ -131,7 +131,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         }
         // solve with updated value
         match solve_idaes_create(&configuration, SolveRequest {
-            flowsheet_id: FLOWSHEET_ID,
+            flowsheet_id: structure::FLOWSHEET_ID,
             debug: Some(true),
             require_variables_fixed: Some(true),
         }).await {
